@@ -27,21 +27,9 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+public import FelinePine
 import Foundation
-
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
-#else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
-#endif
+public import Logging
 
 // swiftlint:disable strict_fileprivate
 private class LoggingSystemRepository: @unchecked Sendable {
@@ -54,15 +42,14 @@ private class LoggingSystemRepository: @unchecked Sendable {
     self.items = items
   }
 
-  #if canImport(os) || canImport(Logging)
-    fileprivate func loggingSystem<LoggingSystemType: LoggingSystem>(
+  fileprivate func loggingSystem<LoggingSystemType: FelinePine.LoggingSystem>(
       for system: LoggingSystemType.Type,
-      using value: @autoclosure () -> [LoggingSystemType.Category: Logger]
-    ) -> [LoggingSystemType.Category: Logger] {
+      using value: @autoclosure () -> [LoggingSystemType.Category: Logging.Logger]
+  ) -> [LoggingSystemType.Category: Logging.Logger] {
       let anyItem = lock.withLock {
         items[system.identifier]
       }
-      if let item = anyItem as? [LoggingSystemType.Category: Logger] {
+    if let item = anyItem as? [LoggingSystemType.Category: Logging.Logger] {
         return item
       } else {
         assert(anyItem == nil)
@@ -73,12 +60,11 @@ private class LoggingSystemRepository: @unchecked Sendable {
         }
       }
     }
-  #endif
 }
 
 // swiftlint:enable strict_fileprivate
 
-extension LoggingSystem {
+extension FelinePine.LoggingSystem {
   // swiftlint:disable:next missing_docs
   public static var identifier: String {
     String(reflecting: Self.self)
@@ -86,17 +72,13 @@ extension LoggingSystem {
 
   /// By default, this is `Bundle.main.bundleIdentifier`.
   public static var subsystem: String {
-    #if canImport(os)
-      Bundle.main.bundleIdentifier ?? identifier
-    #else
       identifier
-    #endif
   }
 }
 
-#if canImport(os) || canImport(Logging)
-  extension LoggingSystem where Category: CaseIterable {
-    private static var loggers: [Category: Logger] {
+
+extension FelinePine.LoggingSystem where Category: CaseIterable {
+  private static var loggers: [Category: Logging.Logger] {
       LoggingSystemRepository.shared.loggingSystem(
         for: Self.self,
         using: defaultLoggers()
@@ -105,14 +87,14 @@ extension LoggingSystem {
 
     /// If ``Category`` implements `CaseIterable`, ``LoggingSystem`` can automatically
     /// iterate over the cases and automatically create the ``Logger`` objects needed.
-    public static func logger(forCategory category: Category) -> Logger {
+  public static func loggingLogger(forCategory category: Category) -> Logging.Logger {
       guard let logger = loggers[category] else {
         preconditionFailure("missing logger")
       }
       return logger
     }
 
-    private static func defaultLoggers() -> [Category: Logger] {
+  private static func defaultLoggers() -> [Category: Logging.Logger] {
       .init(
         uniqueKeysWithValues: Category.allCases.map {
           ($0, Logger(subsystem: Self.subsystem, category: $0))
@@ -120,4 +102,3 @@ extension LoggingSystem {
       )
     }
   }
-#endif

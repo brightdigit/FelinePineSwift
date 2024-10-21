@@ -1,5 +1,5 @@
 //
-//  Feline.swift
+//  Loggable.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,38 +27,15 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Logging
 import Foundation
 
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
-#else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
-#endif
-
-/// Defines the ``LoggingSystem`` to use as well as the category.
-public protocol Feline {
-  /// Defined ``LoggingSystemType`` to use for pulling the correct category.
-  associatedtype LoggingSystemType: LoggingSystem
-
-  /// Specific category to use for logging.
-  static var loggingCategory: LoggingSystemType.Category {
-    get
-  }
-}
-
-#if canImport(os) || canImport(Logging)
-  extension Feline where Self: Pine {
-    /// Use the ``loggingCategory`` to define the shared logger for type.
-    public static var logger: Logger {
-      LoggingSystemType.logger(forCategory: loggingCategory)
-    }
-  }
-#endif
+//#if canImport(os) || canImport(Logging)
+//  public typealias FelinePineProtocol = Feline & Pine
+//#else
+//  public typealias FelinePineProtocol = Feline
+//#endif
+//
+///// Loggable type for a ``LoggingSystem``.
+//public protocol Loggable<LoggingSystemType>: FelinePineProtocol
+//  where LoggingSystemType: LoggingSystem {}

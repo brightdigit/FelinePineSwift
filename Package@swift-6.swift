@@ -29,22 +29,30 @@ let swiftSettings: [SwiftSetting] = [
 ]
 
 let package = Package(
-  name: "FelinePine",
+  name: "FelinePineLogging",
   platforms: [.iOS(.v14), .watchOS(.v7), .macOS(.v11)],
   products: [
     .library(
-      name: "FelinePine",
-      targets: ["FelinePine"]
+      name: "FelinePineLogging",
+      targets: ["FelinePineLogging"]
     )
+  ],
+  dependencies: [
+    .package(url: "https://github.com/brightdigit/FelinePine.git", from: "1.0.0-beta.4"),
+    .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
   ],
   targets: [
     .target(
-      name: "FelinePine",
+      name: "FelinePineLogging",
+      dependencies: [
+          "FelinePine",
+          .product(name: "Logging", package: "swift-log")
+      ],
       swiftSettings: swiftSettings
     ),
     .testTarget(
-      name: "FelinePineTests",
-      dependencies: ["FelinePine"]
+      name: "FelinePineLoggingTests",
+      dependencies: ["FelinePineLogging"]
     )
   ]
 )

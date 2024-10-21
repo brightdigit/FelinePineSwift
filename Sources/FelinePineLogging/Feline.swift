@@ -1,5 +1,5 @@
 //
-//  Logger.swift
+//  Feline.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,26 +27,12 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-// swiftlint:disable file_types_order
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
-#else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
-#endif
+public import FelinePine
+import Foundation
+public import Logging
 
-#if canImport(os)
-  /// os.Logger
-  public typealias Logger = os.Logger
-#elseif canImport(Logging)
-  /// swift-log Logging.Logger
-  public typealias Logger = Logging.Logger
-#endif
-// swiftlint:enable file_types_order
+extension Feline where Self: Pine, Self.LoggingSystemType.Category : CaseIterable {
+    public static var logger: Logging.Logger {
+      LoggingSystemType.loggingLogger(forCategory: loggingCategory)
+    }
+  }

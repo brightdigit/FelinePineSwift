@@ -1,5 +1,5 @@
 //
-//  LoggingSystem.swift
+//  Logger+LoggerCategory.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,35 +27,17 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
+    internal import Logging
 
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
-#else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
-#endif
 
-/// Defines the logging categories for your application.
-public protocol LoggingSystem: Sendable {
-  /// Logging categories available to types in the application
-  associatedtype Category: Hashable & RawRepresentable
-    where Category.RawValue == String
+  extension Logger {
+    internal init<Category: RawRepresentable>(
+      subsystem: String,
+      category: Category
+    ) where Category.RawValue == String {
 
-  static var identifier: String { get }
+        self.init(label: subsystem)
+        self[metadataKey: "category"] = "\(category)"
+    }
+  }
 
-  /// Subsystem to use for each ``Logger``.
-  /// By default, this is `Bundle.main.bundleIdentifier`.
-  static var subsystem: String { get }
-  #if canImport(os) || canImport(Logging)
-    /// Fetches the correct logger based on the category.
-    static func logger(forCategory category: Category) -> Logger
-  #endif
-}
