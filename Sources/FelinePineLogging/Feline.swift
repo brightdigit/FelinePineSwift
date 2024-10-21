@@ -31,8 +31,9 @@ public import FelinePine
 import Foundation
 public import Logging
 
-extension Feline where Self: Pine, Self.LoggingSystemType.Category : CaseIterable {
-    public static var logger: Logging.Logger {
-      LoggingSystemType.loggingLogger(forCategory: loggingCategory)
-    }
+extension Feline where Self: Pine, Self.LoggingSystemType.Category: CaseIterable {
+  /// Use the ``loggingCategory`` to define the shared logger for type.
+  public static var logger: Logging.Logger {
+    LoggingSystemType.loggingLogger(forCategory: loggingCategory)
   }
+}

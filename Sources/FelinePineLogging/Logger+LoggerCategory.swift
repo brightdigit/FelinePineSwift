@@ -27,17 +27,14 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-    internal import Logging
+internal import Logging
 
-
-  extension Logger {
-    internal init<Category: RawRepresentable>(
-      subsystem: String,
-      category: Category
-    ) where Category.RawValue == String {
-
-        self.init(label: subsystem)
-        self[metadataKey: "category"] = "\(category)"
-    }
+extension Logger {
+  internal init<Category: RawRepresentable>(
+    subsystem: String,
+    category: Category
+  ) where Category.RawValue == String {
+    self.init(label: subsystem)
+    self[metadataKey: "category"] = "\(category)"
   }
-
+}

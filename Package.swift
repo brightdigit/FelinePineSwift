@@ -7,7 +7,7 @@ let package = Package(
   name: "FelinePineLogging",
   platforms: [.iOS(.v14), .watchOS(.v7), .macOS(.v11)],
   dependencies: [
-    .package(path: "../FelinePine"),
+    .package(path: "Packages/FelinePine"),
     .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
   ],
   products: [
@@ -30,8 +30,8 @@ let package = Package(
         SwiftSetting.enableExperimentalFeature("StrictConcurrency")
       ],
       dependencies: [
-          "FelinePine",
-          .product(name: "Logging", package: "swift-log")
+        "FelinePine",
+        .product(name: "Logging", package: "swift-log")
       ]
     ),
     .testTarget(

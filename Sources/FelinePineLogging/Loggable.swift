@@ -27,15 +27,15 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Logging
 import Foundation
+import Logging
 
-//#if canImport(os)
+// #if canImport(os)
 //  public typealias FelinePineProtocol = Feline & Pine
-//#else
+// #else
 //  public typealias FelinePineProtocol = Feline
-//#endif
+// #endif
 //
 ///// Loggable type for a ``LoggingSystem``.
-//public protocol Loggable<LoggingSystemType>: FelinePineProtocol
+// public protocol Loggable<LoggingSystemType>: FelinePineProtocol
 //  where LoggingSystemType: LoggingSystem {}

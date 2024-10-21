@@ -38,15 +38,15 @@ let package = Package(
     )
   ],
   dependencies: [
-  .package(path: "../FelinePine"),
+    .package(path: "Packages/FelinePine"),
     .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
   ],
   targets: [
     .target(
       name: "FelinePineLogging",
       dependencies: [
-          "FelinePine",
-          .product(name: "Logging", package: "swift-log")
+        "FelinePine",
+        .product(name: "Logging", package: "swift-log")
       ],
       swiftSettings: swiftSettings
     ),
