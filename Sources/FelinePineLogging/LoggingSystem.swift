@@ -54,7 +54,7 @@
 //  /// Subsystem to use for each ``Logger``.
 //  /// By default, this is `Bundle.main.bundleIdentifier`.
 //  static var subsystem: String { get }
-//  #if canImport(os) || canImport(Logging)
+//  #if canImport(os)
 //    /// Fetches the correct logger based on the category.
 //    static func logger(forCategory category: Category) -> Logger
 //  #endif
