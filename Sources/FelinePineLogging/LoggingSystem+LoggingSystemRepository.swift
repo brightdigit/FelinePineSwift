@@ -27,7 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
+internal import Foundation
 public import protocol FelinePine.LoggingSystem
 public import struct Logging.Logger
 

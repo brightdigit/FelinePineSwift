@@ -28,7 +28,7 @@
 //
 
 public import FelinePine
-import Foundation
+internal import Foundation
 public import Logging
 
 extension Feline where Self: Pine, Self.LoggingSystemType.Category: CaseIterable {
