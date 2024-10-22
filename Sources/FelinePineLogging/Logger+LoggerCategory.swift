@@ -27,17 +27,18 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-    internal import Logging
+#if swift(<5.9)
+  import Logging
+#else
+  internal import Logging
+#endif
 
-
-  extension Logger {
-    internal init<Category: RawRepresentable>(
-      subsystem: String,
-      category: Category
-    ) where Category.RawValue == String {
-
-        self.init(label: subsystem)
-        self[metadataKey: "category"] = "\(category)"
-    }
+extension Logger {
+  internal init<Category: RawRepresentable>(
+    subsystem: String,
+    category: Category
+  ) where Category.RawValue == String {
+    self.init(label: subsystem)
+    self[metadataKey: "category"] = "\(category)"
   }
-
+}

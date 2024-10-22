@@ -27,16 +27,22 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePine
+@testable import FelinePineLogging
+import Logging
 import XCTest
+#if canImport(os)
+  import os
+#endif
 
 internal final class FelinePineTests: XCTestCase {
   internal func testLogger() throws {
     #if canImport(os)
-      _ = MockType.logger
-      XCTAssert(true)
+      XCTAssert(MockType.logger is os.Logger)
     #else
-      throw XCTSkip("No Logger available.")
+      XCTAssert(MockType.logger is Logging.Logger)
     #endif
+    XCTAssert(MockType.swiftLogger is Logging.Logger)
+
+    XCTAssert(true)
   }
 }

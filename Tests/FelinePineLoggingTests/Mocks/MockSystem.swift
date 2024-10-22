@@ -27,7 +27,8 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePine
+import FelinePine
+@testable import FelinePineLogging
 import XCTest
 
 internal struct MockSystem: LoggingSystem {

@@ -6,19 +6,23 @@ import PackageDescription
 let package = Package(
   name: "FelinePineLogging",
   platforms: [.iOS(.v14), .watchOS(.v7), .macOS(.v11)],
-  dependencies: [
-    .package(path: "../FelinePine"),
-    .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
-  ],
   products: [
     .library(
       name: "FelinePineLogging",
       targets: ["FelinePineLogging"]
     )
   ],
+  dependencies: [
+    .package(url: "https://github.com/brightdigit/FelinePine.git", branch: "v1.0.0-beta.5"),
+    .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
+  ],
   targets: [
     .target(
       name: "FelinePineLogging",
+      dependencies: [
+        "FelinePine",
+        .product(name: "Logging", package: "swift-log")
+      ],
       swiftSettings: [
         SwiftSetting.enableUpcomingFeature("BareSlashRegexLiterals"),
         SwiftSetting.enableUpcomingFeature("ConciseMagicFile"),
@@ -27,11 +31,8 @@ let package = Package(
         SwiftSetting.enableUpcomingFeature("ImplicitOpenExistentials"),
         SwiftSetting.enableUpcomingFeature("StrictConcurrency"),
         SwiftSetting.enableUpcomingFeature("DisableOutwardActorInference"),
-        SwiftSetting.enableExperimentalFeature("StrictConcurrency")
-      ],
-      dependencies: [
-          "FelinePine",
-          .product(name: "Logging", package: "swift-log")
+        SwiftSetting.enableExperimentalFeature("StrictConcurrency"),
+        SwiftSetting.enableExperimentalFeature("AccessLevelOnImport")
       ]
     ),
     .testTarget(

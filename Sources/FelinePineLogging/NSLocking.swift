@@ -27,7 +27,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
+#if swift(<5.9)
+  import Foundation
+#else
+  internal import Foundation
+#endif
 
 #if !canImport(os)
   extension NSLocking {
