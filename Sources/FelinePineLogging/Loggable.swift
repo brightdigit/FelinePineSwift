@@ -68,3 +68,13 @@
 /////// Loggable type for a ``LoggingSystem``.
 //// public protocol Loggable<LoggingSystemType>: FelinePineProtocol
 ////  where LoggingSystemType: LoggingSystem {}
+
+import FelinePine
+import Logging
+
+
+// extension Loggable where Self.LoggingSystemType.Category : CaseIterable{
+//   public static var logger: Logger {
+//     LoggingSystemType.logger(forCategory: loggingCategory)
+//   }
+// }

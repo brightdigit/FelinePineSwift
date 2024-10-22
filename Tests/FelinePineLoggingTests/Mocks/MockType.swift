@@ -27,11 +27,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import FelinePine
 @testable import FelinePineLogging
 import XCTest
-import FelinePine
 
-internal struct MockType: FelinePineProtocol {
+internal struct MockType: Loggable {
   internal typealias LoggingSystemType = MockSystem
 
   internal static let loggingCategory: MockSystem.Category = .alpha

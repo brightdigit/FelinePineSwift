@@ -27,17 +27,23 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if swift(<5.9)
+ import Logging
+ import Foundation
+#else
 public import Foundation
 public import Logging
-
-#if !canImport(os)
-  /// Defines a shared logger for the type.
-  ///
-  /// Provides a shared ``Logger`` to use in this type.
-  public protocol Pine {
-    /// Shared logger for Type.
-    static var logger: Logger {
-      get
-    }
-  }
 #endif
+
+
+// #if !canImport(os)
+//   /// Defines a shared logger for the type.
+//   ///
+//   /// Provides a shared ``Logger`` to use in this type.
+//   public protocol Pine {
+//     /// Shared logger for Type.
+//     static var logger: Logger {
+//       get
+//     }
+//   }
+// #endif

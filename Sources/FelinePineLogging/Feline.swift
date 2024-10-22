@@ -27,13 +27,29 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-public import FelinePine
-internal import Foundation
-public import Logging
+#if swift(<5.9)
+ import FelinePine
+ import Foundation
+ import Logging
+#else
+  public import FelinePine
+  internal import Foundation
+  public import Logging
+#endif
 
-extension Feline where Self: Pine, Self.LoggingSystemType.Category: CaseIterable {
+  // /// Defines a shared logger for the type.
+  // ///
+  // /// Provides a shared ``Logger`` to use in this type.
+  // public protocol Pine {
+  //   /// Shared logger for Type.
+  //   static var logger: Logger {
+  //     get
+  //   }
+  // }
+
+extension Feline where Self.LoggingSystemType.Category: CaseIterable {
   /// Use the ``loggingCategory`` to define the shared logger for type.
   public static var logger: Logging.Logger {
-    LoggingSystemType.loggingLogger(forCategory: loggingCategory)
+    LoggingSystemType.swiftLogger(forCategory: loggingCategory)
   }
 }

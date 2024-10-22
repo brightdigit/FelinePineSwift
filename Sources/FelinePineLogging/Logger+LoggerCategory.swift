@@ -27,7 +27,11 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#if swift(<5.9)
+ import Logging
+#else
 internal import Logging
+#endif
 
 extension Logger {
   internal init<Category: RawRepresentable>(
