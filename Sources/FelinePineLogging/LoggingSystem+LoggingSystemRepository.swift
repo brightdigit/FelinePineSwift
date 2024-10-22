@@ -64,17 +64,17 @@ private class LoggingSystemRepository: @unchecked Sendable {
 
 // swiftlint:enable strict_fileprivate
 
-extension LoggingSystem {
-  // swiftlint:disable:next missing_docs
-  public static var identifier: String {
-    String(reflecting: Self.self)
-  }
-
-  /// By default, this is `Bundle.main.bundleIdentifier`.
-  public static var subsystem: String {
-    identifier
-  }
-}
+//extension LoggingSystem {
+//  // swiftlint:disable:next missing_docs
+//  public static var identifier: String {
+//    String(reflecting: Self.self)
+//  }
+//
+//  /// By default, this is `Bundle.main.bundleIdentifier`.
+//  public static var subsystem: String {
+//    identifier
+//  }
+//}
 
 extension LoggingSystem where Category: CaseIterable {
   private static var loggers: [Category: Logging.Logger] {

@@ -29,6 +29,7 @@
 
 @testable import FelinePineLogging
 import XCTest
+import FelinePine
 
 internal struct MockType: FelinePineProtocol {
   internal typealias LoggingSystemType = MockSystem

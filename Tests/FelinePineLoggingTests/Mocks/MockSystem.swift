@@ -27,8 +27,9 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePineLogging
+@testable public import FelinePineLogging
 import XCTest
+import FelinePine
 
 internal struct MockSystem: LoggingSystem {
   internal enum Category: String, CaseIterable {
