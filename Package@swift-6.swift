@@ -51,7 +51,7 @@ let package = Package(
       swiftSettings: swiftSettings
     ),
     .testTarget(
-      name: "FelinePineLoggingTests",
+      name: "FelinePineSwiftTests",
       dependencies: ["FelinePineSwift"]
     )
   ]
