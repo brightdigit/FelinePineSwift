@@ -37,16 +37,6 @@
   public import Logging
 #endif
 
-// /// Defines a shared logger for the type.
-// ///
-// /// Provides a shared ``Logger`` to use in this type.
-// public protocol Pine {
-//   /// Shared logger for Type.
-//   static var logger: Logger {
-//     get
-//   }
-// }
-
 extension Feline where Self.LoggingSystemType.Category: CaseIterable {
   /// Use the ``loggingCategory`` to define the shared logger for type.
   public static var swiftLogger: Logging.Logger {
