@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:brightdigit/FelinePine.git
 	branch = v1.0.0-beta.5
-	commit = 97ae936088770d2ad879e9d2c768e5e8e096c05d
-	parent = 7a597ab33d1e01a6f3f79e445d9576ab3e844d6a
+	commit = b7f984071a7b583ba23fda4991e05dd6100354ce
+	parent = bb77d179975a8647fbef8b777b4100dad4d47c1e
 	method = merge
 	cmdver = 0.4.9

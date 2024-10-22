@@ -27,7 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePineLogging
+@testable import FelinePine
 import XCTest
 
 internal final class FelinePineTests: XCTestCase {
@@ -36,7 +36,7 @@ internal final class FelinePineTests: XCTestCase {
       _ = MockType.logger
       XCTAssert(true)
     #else
-      throw XCTSkip("No Logger available.")
+      throw XCTSkip("OSLog not available")
     #endif
   }
 }
