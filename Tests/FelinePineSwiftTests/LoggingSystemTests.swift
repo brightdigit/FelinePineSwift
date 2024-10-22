@@ -1,5 +1,5 @@
 //
-//  MockType.swift
+//  LoggingSystemTests.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,11 +27,35 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePine
+@testable import FelinePineSwift
+import Logging
 import XCTest
 
-internal struct MockType: FelinePineProtocol {
-  internal typealias LoggingSystemType = MockSystem
+#if canImport(os)
+  import os
+#endif
 
-  internal static let loggingCategory: MockSystem.Category = .alpha
+internal final class LoggingSystemTests: XCTestCase {
+  internal func testIdentifier() {
+    XCTAssertEqual(MockSystem.identifier, String(reflecting: MockSystem.self))
+  }
+
+  internal func testSubsystem() {
+    let subsystem = MockSystem.subsystem
+    if let bundleIdentifier = Bundle.main.bundleIdentifier {
+      XCTAssertEqual(subsystem, bundleIdentifier)
+    } else {
+      XCTAssertEqual(subsystem, MockSystem.identifier)
+    }
+  }
+
+  internal func testLogger() throws {
+    for category in MockSystem.Category.allCases {
+      #if canImport(os)
+        XCTAssert(MockSystem.logger(forCategory: category) is os.Logger)
+      #else
+        XCTAssert(MockSystem.logger(forCategory: category) is Logging.Logger)
+      #endif
+    }
+  }
 }

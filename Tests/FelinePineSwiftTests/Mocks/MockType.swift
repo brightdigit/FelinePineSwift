@@ -1,5 +1,5 @@
 //
-//  MockSystem.swift
+//  MockType.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,13 +27,12 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePine
+import FelinePine
+@testable import FelinePineSwift
 import XCTest
 
-internal struct MockSystem: LoggingSystem {
-  internal enum Category: String, CaseIterable {
-    case alpha
-    case beta
-    case gamma
-  }
+internal struct MockType: Loggable {
+  internal typealias LoggingSystemType = MockSystem
+
+  internal static let loggingCategory: MockSystem.Category = .alpha
 }

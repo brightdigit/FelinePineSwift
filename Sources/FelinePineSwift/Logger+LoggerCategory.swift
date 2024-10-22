@@ -1,5 +1,5 @@
 //
-//  Pine.swift
+//  Logger+LoggerCategory.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,30 +27,18 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
-
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
+#if swift(<5.9)
+  import Logging
 #else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
+  internal import Logging
 #endif
 
-#if canImport(os) || canImport(Logging)
-  /// Defines a shared logger for the type.
-  ///
-  /// Provides a shared ``Logger`` to use in this type.
-  public protocol Pine {
-    /// Shared logger for Type.
-    static var logger: Logger {
-      get
-    }
+extension Logger {
+  internal init<Category: RawRepresentable>(
+    subsystem: String,
+    category: Category
+  ) where Category.RawValue == String {
+    self.init(label: subsystem)
+    self[metadataKey: "category"] = "\(category)"
   }
-#endif
+}

@@ -1,5 +1,5 @@
 //
-//  Logger.swift
+//  MockSystem.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,26 +27,14 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-// swiftlint:disable file_types_order
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
-#else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
-#endif
+import FelinePine
+@testable import FelinePineSwift
+import XCTest
 
-#if canImport(os)
-  /// os.Logger
-  public typealias Logger = os.Logger
-#elseif canImport(Logging)
-  /// swift-log Logging.Logger
-  public typealias Logger = Logging.Logger
-#endif
-// swiftlint:enable file_types_order
+internal struct MockSystem: LoggingSystem {
+  internal enum Category: String, CaseIterable {
+    case alpha
+    case beta
+    case gamma
+  }
+}

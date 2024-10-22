@@ -1,5 +1,5 @@
 //
-//  FelinePineTests.swift
+//  NSLocking.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,16 +27,20 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePine
-import XCTest
+#if swift(<5.9)
+  import Foundation
+#else
+  internal import Foundation
+#endif
 
-internal final class FelinePineTests: XCTestCase {
-  internal func testLogger() throws {
-    #if canImport(os) || canImport(Logging)
-      _ = MockType.logger
-      XCTAssert(true)
-    #else
-      throw XCTSkip("No Logger available.")
-    #endif
+#if !canImport(os)
+  extension NSLocking {
+    internal func withLock<R>(_ body: () throws -> R) rethrows -> R {
+      lock()
+      defer {
+        self.unlock()
+      }
+      return try body()
+    }
   }
-}
+#endif

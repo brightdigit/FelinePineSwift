@@ -1,5 +1,5 @@
 //
-//  LoggingSystem.swift
+//  FelinePineTests.swift
 //  FelinePine
 //
 //  Created by Leo Dion.
@@ -27,35 +27,22 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import Foundation
-
-#if swift(<6.0)
-  #if canImport(os)
-    import os
-  #elseif canImport(Logging)
-    import Logging
-  #endif
-#else
-  #if canImport(os)
-    public import os
-  #elseif canImport(Logging)
-    public import Logging
-  #endif
+@testable import FelinePineSwift
+import Logging
+import XCTest
+#if canImport(os)
+  import os
 #endif
 
-/// Defines the logging categories for your application.
-public protocol LoggingSystem: Sendable {
-  /// Logging categories available to types in the application
-  associatedtype Category: Hashable & RawRepresentable
-    where Category.RawValue == String
+internal final class FelinePineTests: XCTestCase {
+  internal func testLogger() throws {
+    #if canImport(os)
+      XCTAssert(MockType.logger is os.Logger)
+    #else
+      XCTAssert(MockType.logger is Logging.Logger)
+    #endif
+    XCTAssert(MockType.swiftLogger is Logging.Logger)
 
-  static var identifier: String { get }
-
-  /// Subsystem to use for each ``Logger``.
-  /// By default, this is `Bundle.main.bundleIdentifier`.
-  static var subsystem: String { get }
-  #if canImport(os) || canImport(Logging)
-    /// Fetches the correct logger based on the category.
-    static func logger(forCategory category: Category) -> Logger
-  #endif
+    XCTAssert(true)
+  }
 }
