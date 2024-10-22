@@ -59,7 +59,7 @@ jobs:
       - name: Build
         run: swift build
       - name: Run tests
-        run: swift test --enable-test-discovery --enable-code-coverage
+        run: swift test --enable-code-coverage
       - uses: sersoft-gmbh/swift-coverage-action@v4
         id: coverage-files
         with:          
