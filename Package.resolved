@@ -1,13 +1,12 @@
 {
-  "originHash" : "28b443d0df58e9261cac33476db9d19e01adfe25cec03143cedec6132ec7c7d8",
   "pins" : [
     {
       "identity" : "felinepine",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/brightdigit/FelinePine.git",
       "state" : {
-        "branch" : "v1.0.0-beta.5",
-        "revision" : "60dcf34263cc53fcf59bfda7d54f2034afc3c6ce"
+        "revision" : "b89389fcf3f1100d0765a6a21244df02b00fbc9e",
+        "version" : "1.0.0-beta.5"
       }
     },
     {
