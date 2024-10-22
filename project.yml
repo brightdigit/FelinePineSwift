@@ -1,4 +1,4 @@
-name: FelinePineLogging
+name: FelinePineSwift
 settings:
   LINT_MODE: ${LINT_MODE}
 packages:

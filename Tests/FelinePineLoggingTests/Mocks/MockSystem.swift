@@ -28,7 +28,7 @@
 //
 
 import FelinePine
-@testable import FelinePineLogging
+@testable import FelinePineSwift
 import XCTest
 
 internal struct MockSystem: LoggingSystem {

@@ -1,4 +1,4 @@
-name: FelinePineLogging
+name: FelinePineSwift
 on:
   push:
     branches-ignore:
@@ -8,7 +8,7 @@ jobs:
   build-ubuntu:
     name: Build on Ubuntu
     env:
-      PACKAGE_NAME: FelinePineLogging
+      PACKAGE_NAME: FelinePineSwift
       SWIFT_VER: ${{ matrix.swift-version }}
     runs-on: ${{ matrix.runs-on }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
@@ -67,7 +67,7 @@ jobs:
   build-macos:
     name: Build on macOS
     env:
-      PACKAGE_NAME: FelinePineLogging
+      PACKAGE_NAME: FelinePineSwift
     runs-on: ${{ matrix.runs-on }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:
@@ -153,7 +153,7 @@ jobs:
         run: ./scripts/lint.sh
         if: ${{ github.event_name == 'pull_request' && ( github.base_ref == 'main' || endsWith( github.ref_name , 'Prep') ) && matrix.xcode == '/Applications/Xcode_16.1.app' }}
       - name: Run iOS target tests
-        run: xcodebuild test -scheme FelinePineLogging -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
+        run: xcodebuild test -scheme FelinePineSwift -sdk iphonesimulator -destination 'platform=iOS Simulator,name=${{ matrix.iPhoneName }},OS=${{ matrix.iOSVersion }}' -enableCodeCoverage YES build test
       - uses: sersoft-gmbh/swift-coverage-action@v4
         id: coverage-files-iOS
         with:          
@@ -167,7 +167,7 @@ jobs:
           files: ${{ join(fromJSON(steps.coverage-files-iOS.outputs.files), ',') }}   
           flags: iOS,iOS${{ matrix.iOSVersion }},macOS,${{ env.XCODE_NAME }}         
       - name: Run watchOS target tests
-        run: xcodebuild test -scheme FelinePineLogging -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}' -enableCodeCoverage YES build test
+        run: xcodebuild test -scheme FelinePineSwift -sdk watchsimulator -destination 'platform=watchOS Simulator,name=${{ matrix.watchName }},OS=${{ matrix.watchOSVersion }}' -enableCodeCoverage YES build test
       - uses: sersoft-gmbh/swift-coverage-action@v4
         id: coverage-files-watchOS
         with:          

@@ -27,7 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@testable import FelinePineLogging
+@testable import FelinePineSwift
 import Logging
 import XCTest
 
