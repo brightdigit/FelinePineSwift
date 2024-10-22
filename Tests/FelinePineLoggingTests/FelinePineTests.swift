@@ -28,12 +28,21 @@
 //
 
 @testable import FelinePineLogging
+import Logging
 import XCTest
+#if canImport(os)
+  import os
+#endif
 
 internal final class FelinePineTests: XCTestCase {
   internal func testLogger() throws {
+    #if canImport(os)
+      XCTAssert(MockType.logger is os.Logger)
+    #else
+      XCTAssert(MockType.logger is Logging.Logger)
+    #endif
+    XCTAssert(MockType.swiftLogger is Logging.Logger)
 
-      _ = MockType.logger
-      XCTAssert(true)
+    XCTAssert(true)
   }
 }

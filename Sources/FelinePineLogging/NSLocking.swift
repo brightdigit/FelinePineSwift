@@ -28,9 +28,9 @@
 //
 
 #if swift(<5.9)
-import Foundation
+  import Foundation
 #else
-internal import Foundation
+  internal import Foundation
 #endif
 
 #if !canImport(os)

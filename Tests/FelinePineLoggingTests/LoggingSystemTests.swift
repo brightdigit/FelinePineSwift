@@ -28,7 +28,12 @@
 //
 
 @testable import FelinePineLogging
+import Logging
 import XCTest
+
+#if canImport(os)
+  import os
+#endif
 
 internal final class LoggingSystemTests: XCTestCase {
   internal func testIdentifier() {
@@ -45,8 +50,12 @@ internal final class LoggingSystemTests: XCTestCase {
   }
 
   internal func testLogger() throws {
-      for category in MockSystem.Category.allCases {
-        _ = MockSystem.logger(forCategory: category)
-      }
+    for category in MockSystem.Category.allCases {
+      #if canImport(os)
+        XCTAssert(MockSystem.logger(forCategory: category) is os.Logger)
+      #else
+        XCTAssert(MockSystem.logger(forCategory: category) is Logging.Logger)
+      #endif
+    }
   }
 }

@@ -28,13 +28,12 @@
 //
 
 #if swift(<5.9)
- import Logging
- import Foundation
+  import Foundation
+  import Logging
 #else
-public import Foundation
-public import Logging
+  public import Foundation
+  public import Logging
 #endif
-
 
 // #if !canImport(os)
 //   /// Defines a shared logger for the type.

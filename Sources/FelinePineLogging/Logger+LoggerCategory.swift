@@ -28,9 +28,9 @@
 //
 
 #if swift(<5.9)
- import Logging
+  import Logging
 #else
-internal import Logging
+  internal import Logging
 #endif
 
 extension Logger {

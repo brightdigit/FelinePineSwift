@@ -28,13 +28,13 @@
 //
 
 #if swift(<5.9)
-import Foundation
-import protocol FelinePine.LoggingSystem
-import struct Logging.Logger
-#else 
-internal import Foundation
-public import protocol FelinePine.LoggingSystem
-public import struct Logging.Logger
+  import protocol FelinePine.LoggingSystem
+  import Foundation
+  import struct Logging.Logger
+#else
+  internal import Foundation
+  public import protocol FelinePine.LoggingSystem
+  public import struct Logging.Logger
 #endif
 
 // swiftlint:disable strict_fileprivate
@@ -78,7 +78,7 @@ extension LoggingSystem where Category: CaseIterable {
     )
   }
 
-    /// If ``Category`` implements `CaseIterable`, ``LoggingSystem`` can automatically
+  /// If ``Category`` implements `CaseIterable`, ``LoggingSystem`` can automatically
   /// iterate over the cases and automatically create the ``Logger`` objects needed.
   public static func swiftLogger(forCategory category: Category) -> Logging.Logger {
     guard let logger = loggers[category] else {
@@ -87,13 +87,13 @@ extension LoggingSystem where Category: CaseIterable {
     return logger
   }
 
-#if !canImport(os)
-  /// If ``Category`` implements `CaseIterable`, ``LoggingSystem`` can automatically
-  /// iterate over the cases and automatically create the ``Logger`` objects needed.
-  public static func logger(forCategory category: Category) -> Logging.Logger {
-    return self.swiftLogger(forCategory: category)
-  }
-#endif
+  #if !canImport(os)
+    /// If ``Category`` implements `CaseIterable`, ``LoggingSystem`` can automatically
+    /// iterate over the cases and automatically create the ``Logger`` objects needed.
+    public static func logger(forCategory category: Category) -> Logging.Logger {
+      swiftLogger(forCategory: category)
+    }
+  #endif
 
   private static func defaultLoggers() -> [Category: Logging.Logger] {
     .init(
