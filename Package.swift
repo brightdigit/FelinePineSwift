@@ -13,7 +13,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/brightdigit/FelinePine.git", from: "1.0.0-beta.5"),
+    .package(url: "https://github.com/brightdigit/FelinePine.git", from: "1.0.0"),
     .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
   ],
   targets: [
